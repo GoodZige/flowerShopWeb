@@ -5,17 +5,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'Footer',
-    data() {
-      return {
-        
-      }
-    },
-    methods: {
-      
+export default {
+  name: 'Footer',
+  data () {
+    return {
+
     }
+  },
+  methods: {
+
   }
+}
 
 </script>
 

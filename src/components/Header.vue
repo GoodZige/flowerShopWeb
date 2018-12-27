@@ -44,7 +44,7 @@
           <el-radio label="男">男</el-radio>
           <el-radio label="女">女</el-radio>
           <el-radio label="保密">保密</el-radio>
-        </el-radio-group> 
+        </el-radio-group>
       </div>
       <div style="margin-top:15px;">
         <el-input placeholder="验证码" v-model="register.check" type="text">
@@ -74,205 +74,204 @@
     </div>
   </div>
 
-
 </template>
 <script>
-  export default {
-    name: "header1",
-    data() {
-      return {
-        nav: "this is nav",
-        activeIndex: "1",
-        activeIndex2: "1",
-        loginDialogVisible: false,
-        registerDialogVisible: false,
-        login: {
-          username: '',
-          password : ''
-        },
-        register: {
-          username: '',
-          password: '',
-          rePassword: '',
-          email: '',
-          check: '',
-          sex : ''
-        },
-        isChecking: false,
-        timer: null,
-        userData: null,
-        isAlive: false,
-        faceUrl: require('../assets/face.png')
-      };
+export default {
+  name: 'header1',
+  data () {
+    return {
+      nav: 'this is nav',
+      activeIndex: '1',
+      activeIndex2: '1',
+      loginDialogVisible: false,
+      registerDialogVisible: false,
+      login: {
+        username: '',
+        password: ''
+      },
+      register: {
+        username: '',
+        password: '',
+        rePassword: '',
+        email: '',
+        check: '',
+        sex: ''
+      },
+      isChecking: false,
+      timer: null,
+      userData: null,
+      isAlive: false,
+      faceUrl: require('../assets/face.png')
+    }
+  },
+  created () {
+    this.axios({
+      method: 'get',
+      url: '/api/user'
+    }).then((response) => {
+      var data = response.data
+      if (data.code == 1) {
+        this.userData = data.data
+        console.log(this.userData)
+      }
+    })
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
     },
-    created(){
-      this.axios({
-        method: 'get',
-        url: '/api/user',
-      }).then((response)=>{
-        var data = response.data
-        if(data.code==1){
-          this.userData = data.data
-          console.log(this.userData)
-        }
-      })
+    handleLoginClose (done) {
+      done()
     },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleLoginClose(done) {
-        done()
-      },
-      sendCheck(e){
-        var that = this
-        if(!this.isChecking){
-          this.isChecking = true
-          let time = 60          
-          e.target.innerHTML = '60s'
-          this.timer = setInterval(function(){
-            if (time>0) {
-              time-=1
-              e.target.innerHTML = time+'s'
-            }else{
-              that.isChecking = false
-              console.log("now is"+that.isChecking)
-              e.target.disabled = 'false'
-              e.target.innerHTML = '发送'
-              clearInterval(that.timer)
-            }
-          },1000)
-          console.log(this.timer,this.isChecking,this.timer)
-          this.axios({
-            method: 'get',
-            url: '/api/user/code',
-            params:{
-              email: this.register.email,
-              type: "REGISTER"
-            }
-          }).then((response)=>{
-            var data = response.data
-            if(data.code==1){
-              this.userData = data.data
-              this.$message({
-                message: '发送成功',
-                type: 'success'
-              })
-            }else{
-              this.$message({
-                message: data.msg,
-                type: 'warning'
-              })
-            }
-          })
-        }else{
-
-        } 
-      },
-      loginAction(){
-        var username = this.login.username
-        var password = this.login.password
-        if(username==''){
-          this.$message({
-            message: '请输入用户名',
-            type: 'warning'
-          })
-        }else if(password==''){
-          this.$message({
-            message: '请输入密码',
-            type: 'warning'
-          })
-        }else{
-          this.axios({
-            method: 'post',
-            url: '/api/user/login',
-            data: {
-              username: username,
-              password: password
-            }
-          }).then((response)=>{
-            var data = response.data
-            this.userData = data.data
-            console.log(data)
-            if(data.code==1){
-              this.$message({
-                message: '登陆成功,欢迎你，'+this.userData.username,
-                type: 'success'
-              })
-              this.loginDialogVisible = false
-            }else{
-              this.$message.error('账号或密码错误')
-              this.login.password = ''
-            }
-          })
-        }      
-      },
-      logoutAction(){
+    sendCheck (e) {
+      var that = this
+      if (!this.isChecking) {
+        this.isChecking = true
+        let time = 60
+        e.target.innerHTML = '60s'
+        this.timer = setInterval(function () {
+          if (time > 0) {
+            time -= 1
+            e.target.innerHTML = time + 's'
+          } else {
+            that.isChecking = false
+            console.log('now is' + that.isChecking)
+            e.target.disabled = 'false'
+            e.target.innerHTML = '发送'
+            clearInterval(that.timer)
+          }
+        }, 1000)
+        console.log(this.timer, this.isChecking, this.timer)
         this.axios({
           method: 'get',
-          url: '/api/user/logout',
-        }).then((response)=>{
-          this.$message({
-            message: '注销成功！',
-            type: 'success'
-          })
-          this.isAlive = false;
-        })
-      },
-      registerAction(){
-        var username = this.register.username
-        var password = this.register.password
-        var rePassword = this.register.rePassword
-        var email = this.register.email
-        var check = this.register.check
-        var sex = this.register.sex
-        var headUrls = ["https://img2.woyaogexing.com/2018/08/03/8d2978b326244863b69560f9576ce489!400x400.jpeg",
-          "https://img2.woyaogexing.com/2018/08/03/c85e2fa470524780a95df5a8a3ed4c4b!400x400.jpeg",
-          "https://img2.woyaogexing.com/2018/08/03/7be89258bb4d4c81a3217fb37afe82dc!400x400.jpeg",
-          "https://img2.woyaogexing.com/2018/08/03/4b802b43f0f948a49154eee55b729278!400x400.jpeg",
-          "https://img2.woyaogexing.com/2018/08/03/43eec3142b3240d29b68826112c74519!400x400.jpeg",
-          "https://img2.woyaogexing.com/2018/08/03/6e47412a45144706beaaf9b58b37436d!400x400.jpeg"
-        ]
-        var headUrl = headUrls[Math.floor(Math.random() * (5 - 0 + 1)) + 0];
-        this.axios({
-          method: 'post',
-          url: '/api/user/register',
-          data: {
-            username: username,
-            password: password,
-            email: email,
-            code: check,
-            sex: sex,
-            headUrl: headUrl
+          url: '/api/user/code',
+          params: {
+            email: this.register.email,
+            type: 'REGISTER'
           }
-        }).then((response)=>{
+        }).then((response) => {
           var data = response.data
-          if(data.code==1){
+          if (data.code == 1) {
+            this.userData = data.data
             this.$message({
-              message: '注册成功',
+              message: '发送成功',
               type: 'success'
             })
-            this.registerDialogVisible = false
-          }else{
+          } else {
             this.$message({
               message: data.msg,
               type: 'warning'
             })
           }
         })
+      } else {
+
       }
     },
-    watch: {
-      userData:{
-        handler(newVal,oldVal){
-          console.log(newVal)
-          console.log('handler:'+newVal+' '+oldVal,this.isAlive)
-          this.isAlive = true
-          this.faceUrl = newVal.headUrl
+    loginAction () {
+      var username = this.login.username
+      var password = this.login.password
+      if (username == '') {
+        this.$message({
+          message: '请输入用户名',
+          type: 'warning'
+        })
+      } else if (password == '') {
+        this.$message({
+          message: '请输入密码',
+          type: 'warning'
+        })
+      } else {
+        this.axios({
+          method: 'post',
+          url: '/api/user/login',
+          data: {
+            username: username,
+            password: password
+          }
+        }).then((response) => {
+          var data = response.data
+          this.userData = data.data
+          console.log(data)
+          if (data.code == 1) {
+            this.$message({
+              message: '登陆成功,欢迎你，' + this.userData.username,
+              type: 'success'
+            })
+            this.loginDialogVisible = false
+          } else {
+            this.$message.error('账号或密码错误')
+            this.login.password = ''
+          }
+        })
+      }
+    },
+    logoutAction () {
+      this.axios({
+        method: 'get',
+        url: '/api/user/logout'
+      }).then((response) => {
+        this.$message({
+          message: '注销成功！',
+          type: 'success'
+        })
+        this.isAlive = false
+      })
+    },
+    registerAction () {
+      var username = this.register.username
+      var password = this.register.password
+      var rePassword = this.register.rePassword
+      var email = this.register.email
+      var check = this.register.check
+      var sex = this.register.sex
+      var headUrls = ['https://img2.woyaogexing.com/2018/08/03/8d2978b326244863b69560f9576ce489!400x400.jpeg',
+        'https://img2.woyaogexing.com/2018/08/03/c85e2fa470524780a95df5a8a3ed4c4b!400x400.jpeg',
+        'https://img2.woyaogexing.com/2018/08/03/7be89258bb4d4c81a3217fb37afe82dc!400x400.jpeg',
+        'https://img2.woyaogexing.com/2018/08/03/4b802b43f0f948a49154eee55b729278!400x400.jpeg',
+        'https://img2.woyaogexing.com/2018/08/03/43eec3142b3240d29b68826112c74519!400x400.jpeg',
+        'https://img2.woyaogexing.com/2018/08/03/6e47412a45144706beaaf9b58b37436d!400x400.jpeg'
+      ]
+      var headUrl = headUrls[Math.floor(Math.random() * (5 - 0 + 1)) + 0]
+      this.axios({
+        method: 'post',
+        url: '/api/user/register',
+        data: {
+          username: username,
+          password: password,
+          email: email,
+          code: check,
+          sex: sex,
+          headUrl: headUrl
         }
+      }).then((response) => {
+        var data = response.data
+        if (data.code == 1) {
+          this.$message({
+            message: '注册成功',
+            type: 'success'
+          })
+          this.registerDialogVisible = false
+        } else {
+          this.$message({
+            message: data.msg,
+            type: 'warning'
+          })
+        }
+      })
+    }
+  },
+  watch: {
+    userData: {
+      handler (newVal, oldVal) {
+        console.log(newVal)
+        console.log('handler:' + newVal + ' ' + oldVal, this.isAlive)
+        this.isAlive = true
+        this.faceUrl = newVal.headUrl
       }
     }
-  };
+  }
+}
 
 </script>
 <style>

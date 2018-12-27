@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <el-dialog title="商品详情" :visible.sync="detailsVisible" width="50%" :before-close="handleLoginClose">
-      
       <img src="../assets/flower1.png" alt="" class="d_pic">
       <div class="d_content clearfix">
         <h2>南国相思</h2>
@@ -10,7 +9,6 @@
         <p>数量：<el-input-number size="small" v-model="num" :min="1"></el-input-number></p>
         <el-button type="primary" icon="el-icon-goods">加入购物车</el-button>
       </div>
-      
     </el-dialog>
     <h1>{{ msg }}</h1>
     <el-carousel :interval="4000" type="card" height="200px">
@@ -83,54 +81,54 @@
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
-    data() {
-      return {
-        msg: '特别推荐',
-        hot_items: [{
-            id: 1,
-            name: '',
-            cover: '../assets/bg.jpg',
-            style: {
-              background: 'url(' + require('../assets/bg.jpg') + ')'
-            }
-          },
-          {
-            id: 2,
-            name: '',
-            cover: '../assets/bg.jpg',
-            style: {
-              background: 'url(' + require('../assets/bg.jpg') + ')'
-            }
-          },
-          {
-            id: 3,
-            name: '',
-            cover: '../assets/bg.jpg',
-            style: {
-              background: 'url(' + require('../assets/bg.jpg') + ')'
-            }
-          }
-        ],
-        detailsVisible: false,
-        num: 1,
-        currentPage : 1
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {
+      msg: '特别推荐',
+      hot_items: [{
+        id: 1,
+        name: '',
+        cover: '../assets/bg.jpg',
+        style: {
+          background: 'url(' + require('../assets/bg.jpg') + ')'
+        }
+      },
+      {
+        id: 2,
+        name: '',
+        cover: '../assets/bg.jpg',
+        style: {
+          background: 'url(' + require('../assets/bg.jpg') + ')'
+        }
+      },
+      {
+        id: 3,
+        name: '',
+        cover: '../assets/bg.jpg',
+        style: {
+          background: 'url(' + require('../assets/bg.jpg') + ')'
+        }
       }
+      ],
+      detailsVisible: false,
+      num: 1,
+      currentPage: 1
+    }
+  },
+  methods: {
+    getDetails (e) {
+      console.log(e.target, 111)
+      return false
     },
-    methods: {
-      getDetails(e) {
-        console.log(e.target, 111)
-        return false
-      },
-      handleLoginClose(done) {
-        done()
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
+    handleLoginClose (done) {
+      done()
+    },
+    handleCurrentChange (val) {
+      console.log(`当前页: ${val}`)
     }
   }
+}
 
 </script>
 
@@ -239,7 +237,7 @@
   }
   .d_pic{
     width: 30%;
-    margin-right: 50px; 
+    margin-right: 50px;
     float: left;
   }
   .d_content{
