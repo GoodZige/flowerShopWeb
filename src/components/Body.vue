@@ -11,7 +11,7 @@
       </div>
     </el-dialog>
     <h1>{{ msg }}</h1>
-    <el-carousel :interval="4000" type="card" height="200px">
+    <el-carousel :interval="4000" height="250px">
       <el-carousel-item v-for="item in hot_items" :key="item.id" :style="item.style">
         <h3>{{ item.name }}</h3>
         <a href="##" @click="detailsVisible = true">详情页》》</a>
@@ -54,6 +54,9 @@
         <el-pagination layout="prev, pager, next" :page-size="8" :total="21" @current-change="handleCurrentChange" :current-page.sync="currentPage">
         </el-pagination>
       </div>
+    </div>
+    <div class="middle">
+      <div class="richContent richContent0"><p><strong><span style="font-family:微软雅黑;font-size:40px;color:#FFFFFF;">每一个懂花的人，都是一个浪漫而富有诗意的人</span></strong></p><p><span style="font-family:微软雅黑;font-size:30px;color:#FFFFFF;">在这里，您可以找到生活的乐趣</span></p></div>
     </div>
     <div class="contact">
       <h1>联系我们</h1>
@@ -208,7 +211,6 @@ export default {
 
   .hot {
     border-top: 1px solid #ffd04b;
-    box-shadow: darkgrey 10px 10px 30px 5px;
   }
 
   .hotHeader {
@@ -244,5 +246,12 @@ export default {
   .d_content{
     text-align: left;
     /* width: 50%; */
+  }
+  .middle{
+    height: 180px;
+    background: url("http://10336387.s61i.faiusr.com/2/AD0Ig-H2BBACGAAgjq2fvgUooOSR-AQwgA84yAE.jpg");
+  }
+  .middle div {
+    padding: 20px 0;
   }
 </style>

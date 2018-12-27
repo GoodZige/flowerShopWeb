@@ -80,8 +80,25 @@
         <el-menu-item class="login" index="6" @click="registerDialogVisible = true" v-if="!isAlive">注册</el-menu-item>
       </el-menu>
     </div>
-    <div id="welcome">
-      <span>Welcome to Flower Shop</span>
+    <div id="welcome" style="position: relative;">
+      <div id="module478" bannertitle="图片" _indexclass="formIndex4" _moduletype="1" _modulestyle="79" _moduleid="478" class="form form478 formIndex4 formStyle79 formInZone " title="" _sys="1" _banid="AD0Ig-H2BBACGAAgp9Kq0AUoo_2w5QUwgA84vAU" style="position: absolute; top: 211px; left: 500px; width: 580px; height: 300px;" _side="0" _intab="0" _inmulmcol="0" _infullmeasure="0" _inpack="0" _inpopupzone="0" _infullmeasurepack="0" _intabpack="0" _autoheight="0" _global="false" _independent="false" data-scrollbar="0">
+          <div class="lightModuleOuterContent lightModuleOuterContent478"><div class="floatImg floatImg_J floatImg_J_special">
+              <a hidefocus="true" class="J_floatImg_jump f_floatImg_jump ">
+                <div class="floatImgWrap">
+                  <div class="forMargin">
+                    <img id="float_img_478" class="float_in_img J_defImage " src="//10336387.s61i.faiusr.com/4/AD0Ig-H2BBAEGAAg18Sn4AUovva9_AIwxAQ4rAI.png" alt="AD0Ig-H2BBAEGAAg18Sn4AUovva9_AIwxAQ4rAI" style="height: 300px;">
+                  </div>
+                </div>
+              </a>
+          </div>
+        </div>
+      </div>
+      <div id="module479" bannertitle="文本" _indexclass="formIndex5" _moduletype="1" _modulestyle="86" _moduleid="479" class="form form479 formIndex5 formStyle86 formInZone  siteEditor " title="" _sys="1" _banid="AD0Ig-H2BBACGAAgp9Kq0AUoo_2w5QUwgA84vAU" style="position: absolute; top: 150px; left: 668px; width: 238px; height: 65px; min-height: 40px;" _side="0" _intab="0" _inmulmcol="0" _infullmeasure="0" _inpack="0" _inpopupzone="0" _infullmeasurepack="0" _intabpack="0" _autoheight="0" _global="false" _independent="false" data-scrollbar="0">
+        <div class="lightModuleOuterContent lightModuleOuterContent479"><div class="fk-editor simpleText fk-editor-break-word  "><span style="color: rgb(255, 255, 255); font-family: &quot;思源宋体 cn light&quot;, &quot;source han serif sc&quot;, 微软雅黑; font-size: 49px;">Welcome</span></div></div>
+      </div>
+      <div id="module480" bannertitle="文本" _indexclass="formIndex6" _moduletype="1" _modulestyle="86" _moduleid="480" class="form form480 formIndex6 formStyle86 formInZone  siteEditor " title="" _sys="1" _banid="AD0Ig-H2BBACGAAgp9Kq0AUoo_2w5QUwgA84vAU" style="position: absolute; top: 230px; left: 660px; width: 269px; height: 37px; min-height: 40px;" _side="0" _intab="0" _inmulmcol="0" _infullmeasure="0" _inpack="0" _inpopupzone="0" _infullmeasurepack="0" _intabpack="0" _autoheight="0" _global="false" _independent="false" data-scrollbar="0">
+        <div class="lightModuleOuterContent lightModuleOuterContent480"><div class="fk-editor simpleText fk-editor-break-word  "><span style="color: rgb(255, 255, 255); font-family: &quot;思源黑体 cn light&quot;, &quot;source han sans cn&quot;, 微软雅黑; font-size: 28px;">幸福有你，爱是用心</span></div></div>
+      </div>
     </div>
   </div>
 
@@ -309,16 +326,13 @@ export default {
     width: 55px;
     border-radius:50%;
   }
-  #font1 {
-    color: rgb(114, 207, 66);
-  }
 
   #font1 {
-    color: rgb(114, 207, 66);
+    color: #ffc001;
   }
 
   #font2 {
-    color: rgb(177, 216, 158);
+   color: rgb(204, 204, 204)
   }
 
   #logo {
@@ -332,8 +346,8 @@ export default {
   }
 
   #welcome {
-    height: 740px;
-    line-height: 740px;
+    height: 300px;
+    line-height: 300px;
     font-family: "RBNo2";
     color: #ffd04b;
     font-size: 100px;
@@ -373,5 +387,19 @@ export default {
   .username{
     width: 30px;
     margin: 0 30px;
+  }
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  .el-carousel__item:nth-child(2n) {
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: rgba(255,255,255,0.1);
   }
 </style>
