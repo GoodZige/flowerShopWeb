@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <el-dialog title="登陆" :visible.sync="loginDialogVisible" width="30%" :before-close="handleLoginClose">
+    <el-dialog title="登录" :visible.sync="loginDialogVisible" width="30%" :before-close="handleLoginClose">
       <div>
         <el-input placeholder="请输入账号" v-model="login.username">
           <template slot="prepend">账号</template>
@@ -64,9 +64,20 @@
           <font id="font1">Flower</font>
           <font id="font2">Shop</font>
         </span>
-        <el-menu-item index="3" @click="loginDialogVisible = true"><img :src="faceUrl" id="face" alt=""></el-menu-item>
-        <el-menu-item index="4" @click="loginDialogVisible = true" v-if="!isAlive">登录</el-menu-item>
-        <el-menu-item index="5" @click="logoutAction" v-if="isAlive">注销</el-menu-item>
+        <el-submenu class="userList" index="3" v-if="isAlive">
+          <template slot="title"><img :src="faceUrl" class="face" alt="">
+            <span class="username" v-text="userData.username"></span>
+          </template>
+          <el-menu-item index="3-1">我的订单</el-menu-item>
+          <el-menu-item index="3-2">我的购物车</el-menu-item>
+          <el-menu-item index="3-3">我的收货地址</el-menu-item>
+          <el-menu-item index="3-4" @click="logoutAction">注销</el-menu-item>
+        </el-submenu>
+        <el-menu-item class="login" index="4" @click="loginDialogVisible = true" v-if="!isAlive">
+          <img :src="faceUrl" class="face" alt="">
+        </el-menu-item>
+        <el-menu-item class="login" index="5" @click="loginDialogVisible = true" v-if="!isAlive">登录</el-menu-item>
+        <el-menu-item class="login" index="6" @click="registerDialogVisible = true" v-if="!isAlive">注册</el-menu-item>
       </el-menu>
     </div>
     <div id="welcome">
@@ -216,6 +227,7 @@ export default {
           type: 'success'
         })
         this.isAlive = false
+        this.faceUrl = require('../assets/face.png')
       })
     },
     registerAction () {
@@ -225,12 +237,11 @@ export default {
       var email = this.register.email
       var check = this.register.check
       var sex = this.register.sex
-      var headUrls = ['https://img2.woyaogexing.com/2018/08/03/8d2978b326244863b69560f9576ce489!400x400.jpeg',
-        'https://img2.woyaogexing.com/2018/08/03/c85e2fa470524780a95df5a8a3ed4c4b!400x400.jpeg',
-        'https://img2.woyaogexing.com/2018/08/03/7be89258bb4d4c81a3217fb37afe82dc!400x400.jpeg',
-        'https://img2.woyaogexing.com/2018/08/03/4b802b43f0f948a49154eee55b729278!400x400.jpeg',
-        'https://img2.woyaogexing.com/2018/08/03/43eec3142b3240d29b68826112c74519!400x400.jpeg',
-        'https://img2.woyaogexing.com/2018/08/03/6e47412a45144706beaaf9b58b37436d!400x400.jpeg'
+      var headUrls = ['https://zone-1253231183.cos.ap-shanghai.myqcloud.com/4b802b43f0f948a49154eee55b729278!400x400.jpeg',
+        'https://zone-1253231183.cos.ap-shanghai.myqcloud.com/7be89258bb4d4c81a3217fb37afe82dc!400x400.jpeg',
+        'https://zone-1253231183.cos.ap-shanghai.myqcloud.com/8d2978b326244863b69560f9576ce489!400x400.jpeg',
+        'https://zone-1253231183.cos.ap-shanghai.myqcloud.com/c85e2fa470524780a95df5a8a3ed4c4b!400x400.jpeg',
+        'https://zone-1253231183.cos.ap-shanghai.myqcloud.com/f6f0d8f9abb445858cab6c92ce6a3bdb!400x400.jpeg'
       ]
       var headUrl = headUrls[Math.floor(Math.random() * (5 - 0 + 1)) + 0]
       this.axios({
@@ -293,7 +304,7 @@ export default {
     margin-right: 600px;
   }
 
-  #face{
+  .face{
     width: 55px;
     border-radius:50%;
   }
@@ -354,5 +365,12 @@ export default {
   }
   #sendCheckBtn{
     width: 70px;
+  }
+  .userList {
+    width: 200px;
+  }
+  .username{
+    width: 30px;
+    margin: 0 30px;
   }
 </style>
