@@ -300,7 +300,8 @@ export default {
     float: left;
     line-height: 60px;
     font-family: "RBNo2";
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
     margin-right: 600px;
   }
 

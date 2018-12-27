@@ -21,6 +21,7 @@
       <div class="hotHeader">
         热销鲜花
       </div>
+      <img id="float_img_451" class="float_in_img J_defImage " src="//10336387.s61i.faiusr.com/4/AD0Ig-H2BBAEGAAg-6yfvgUo0sfGkgQw5QE4Dg.png" alt="AD0Ig-H2BBAEGAAg-6yfvgUo0sfGkgQw5QE4Dg" style="height: 14px;">
       <el-row>
         <el-col :span="6" v-for="(o, index) in 4" :key="o">
           <el-card :body-style="{ padding: '4px' }" shadow="always">
